@@ -1,9 +1,9 @@
 #Group Name
 ######Unity Projects - CG Fall 2015 @ Rutgers
-######By: *[Leader], [Member1], [Member2], [Member3]*
+######By: Jon Lee, Anthony Castronuovo, Jake Taubner
 Check out our website: [Group Name Website](https://www.google.com "Google's Homepage!")
 
-![alt text](teamLogo.png)
+![alt text](tumblr_npi5j8UeRn1rfo228o4_250.png)
 
 ###B1: Navigation and Animation
 1. I am a fun project!
