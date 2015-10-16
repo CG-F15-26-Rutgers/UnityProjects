@@ -16,10 +16,8 @@ public class Director : MonoBehaviour {
 					hit.transform.gameObject.GetComponent<AgentScript>().ChangeState();
 
 				// If the user clicked on an obstacle, allow them to control it.
-				else if (hit.transform.gameObject.CompareTag("Obstacle")){
-					// TODO: implement obstacle script and allow the user to control it with the arrow keys.
-					// Clicking on a different obstacle should transfer control to that obstacle.
-				}
+				else if (hit.transform.gameObject.CompareTag("Obstacle"))
+					hit.transform.gameObject.GetComponent<ObjectScript>().ChangeState();
 
 				// Otherwise, change the agents' goals to the position the user clicked.
 				else

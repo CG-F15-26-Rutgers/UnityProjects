@@ -8,6 +8,13 @@ public class AgentScript : MonoBehaviour{
 
 	void Start(){
 		agent = GetComponent<NavMeshAgent>();
+		agent.autoBraking = true;
+		agent.autoRepath = true;
+		agent.Stop();
+
+		target = agent.gameObject.transform.position; // First "target" should be its current position.
+		agent.SetDestination(target);
+		
 		active = false;
 	}
 
