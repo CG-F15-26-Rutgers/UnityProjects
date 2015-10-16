@@ -7,7 +7,7 @@ public class CubesMoves : MonoBehaviour {
 
     IEnumerator Start()
     {
-        var pointA = transform.position;
+        Vector3 pointA = transform.position;
         while (true)
         {
             yield return StartCoroutine(MoveObject(transform, pointA, pointB, 3.0f));
@@ -15,14 +15,14 @@ public class CubesMoves : MonoBehaviour {
         }
     }
 
-    IEnumerator MoveObject(Transform thisTransform, Vector3 startPos, Vector3 endPos, float time)
+    IEnumerator MoveObject(Transform thisTransform, Vector3 start, Vector3 end, float time)
     {
-        var i = 0.0f;
-        var rate = 3.0f / time;
+        float i = 0.0f;
+        float rate = 3.0f / time;
         while (i < 1.0f)
         {
             i += Time.deltaTime * rate;
-            thisTransform.position = Vector3.Lerp(startPos, endPos, i);
+            thisTransform.position = Vector3.Lerp(start, end, i);
             yield return null;
         }
     }
