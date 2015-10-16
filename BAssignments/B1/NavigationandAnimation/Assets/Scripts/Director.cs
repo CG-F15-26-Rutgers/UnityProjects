@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-// using Physics;
 
 public class Director : MonoBehaviour {
 	
@@ -24,7 +23,7 @@ public class Director : MonoBehaviour {
 
 				// Otherwise, change the agents' goals to the position the user clicked.
 				else
-					AgentScript.target = hit.transform.position;
+					AgentScript.target = hit.point;
 			}
 		}
 	}
