@@ -3,24 +3,54 @@ using System.Collections;
 
 public class HumanScript : MonoBehaviour {
 
+	[SerializeField][Range(1,20)]
+	private float speed = 10;
+	
+	private Vector3 targetPosition;
+	private bool isMoving;
+	
+	const int LEFT_MOUSE_BUTTON = 0;
+	
 	private Animator anim;
-	private float h;
-	private float v;
-	private float j;
 	
-	// Use this for initialization
-	void Start () {
+	void Start() {
 		anim = GetComponent<Animator> ();
+		
+		targetPosition = transform.position;
+		isMoving = false;
 	}
 	
-	// Update is called once per frame
-	void FixedUpdate () {
-		h = Input.GetAxis ("Horizontal");
-		v = Input.GetAxis ("Vertical");
-		j = Input.GetAxis ("Jump");
+	void Update() {
+		if (Input.GetMouseButton (LEFT_MOUSE_BUTTON))
+			SetTargetPosition ();
 		
-		anim.SetFloat ("Walk", v);
-		anim.SetFloat ("Turn", h);
-		anim.SetFloat ("Jump", j);
+		if (isMoving) 
+			MovePlayer ();
 	}
+	
+	void SetTargetPosition() {
+		Plane plane = new Plane (Vector3.up, transform.position);
+		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+		float point = 0f;
+		
+		if(plane.Raycast(ray, out point))
+			targetPosition = ray.GetPoint(point);
+		
+		isMoving = true;
+	}
+	
+	void MovePlayer() {
+		transform.LookAt (targetPosition);
+		
+		transform.position = Vector3.MoveTowards (transform.position, targetPosition, speed * Time.deltaTime);
+		anim.SetFloat ("Walk", 1);
+		
+		if (transform.position == targetPosition) {
+			isMoving = false;
+			anim.SetFloat("Walk", 0);
+		}
+		
+		Debug.DrawLine (transform.position, targetPosition, Color.red);
+	}
+
 }
