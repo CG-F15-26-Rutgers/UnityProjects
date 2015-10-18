@@ -7,15 +7,9 @@ public class ButtonScript : MonoBehaviour {
     public Button agents;
     public Button animation;
     public Button together;
+    public Button menu;
     public Button quit;
 
-	// Use this for initialization
-	void Start () {
-        agents = agents.GetComponent<Button>();
-        animation = animation.GetComponent<Button>();
-        together = together.GetComponent<Button>();
-	}
-	
     public void startOne()
     {
         Application.LoadLevel(1);
@@ -34,6 +28,11 @@ public class ButtonScript : MonoBehaviour {
     public void quitGame()
     {
         Application.Quit();
+    }
+
+    public void toMenu()
+    {
+        Application.LoadLevel(0);
     }
 
 }
