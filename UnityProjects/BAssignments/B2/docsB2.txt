@@ -1,0 +1,2 @@
+This is B2 project.
+Create B2 project in this folder.
