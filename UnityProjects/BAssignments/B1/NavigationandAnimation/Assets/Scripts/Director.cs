@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Director : MonoBehaviour {
 	
-	void Update () {
+	void Update(){
 
 		AnimatedAgentScript.targetChanged = false;
 	    
@@ -14,7 +14,10 @@ public class Director : MonoBehaviour {
 			if (Physics.Raycast(ray.origin, ray.direction, out hit)){
 
 				// If the user clicked on an agent, then activate or deactivate the agent.
-				if (hit.transform.gameObject.CompareTag("Agent"))
+				if (hit.transform.gameObject.CompareTag("BasicAgent"))
+					hit.transform.gameObject.GetComponent<BasicAgentScript>().ChangeState();
+				
+				else if(hit.transform.gameObject.CompareTag("AnimatedAgent"))
 					hit.transform.gameObject.GetComponent<AnimatedAgentScript>().ChangeState();
 
 				// If the user clicked on an obstacle, then activate or deactivate the obstacle.
@@ -23,6 +26,8 @@ public class Director : MonoBehaviour {
 
 				// Otherwise, change the agents' goals to the position the user clicked.
 				else{
+					BasicAgentScript.target = hit.point;
+					
 					AnimatedAgentScript.targetChanged = true;
 					AnimatedAgentScript.target = hit.point;
 				}

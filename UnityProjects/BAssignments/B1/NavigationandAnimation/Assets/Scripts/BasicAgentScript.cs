@@ -1,17 +1,12 @@
 using UnityEngine;
 using System.Collections;
 
-public class AnimatedAgentScript : MonoBehaviour{
+public class BasicAgentScript : MonoBehaviour{
 	public static Vector3 target;
-	public static bool targetChanged;
-	
 	NavMeshAgent agent;
 	private bool active;
-	private Animator anim;
 
 	void Start(){
-		anim = GetComponent<Animator>();
-		
 		agent = GetComponent<NavMeshAgent>();
 		agent.autoBraking = true;
 		agent.autoRepath = true;
@@ -21,28 +16,17 @@ public class AnimatedAgentScript : MonoBehaviour{
 		agent.SetDestination(target);
 		
 		active = false;
-		targetChanged = false;
 	}
 
 	void Update(){
-		if (targetChanged)
+		if (active)
 			agent.SetDestination(target);
-
-		if (active){
-			if (transform.position == target)
-				anim.SetFloat("MoveSpeed", 0);
-			
-			else{
-				transform.LookAt (target);
-				anim.SetFloat ("MoveSpeed", 0.5f);
-			}
-		}
 	}
 	
 	public void ChangeState(){
 		if (active)
 			agent.Stop();
-		else 
+		else
 			agent.Resume();
 		
 		active = !active;
