@@ -1,5 +1,5 @@
 using UnityEngine;
-using System.Collections;
+using System; // Use this to access Math.
 
 public class AnimatedAgentScript : MonoBehaviour{
 	public static Vector3 target;
@@ -8,6 +8,9 @@ public class AnimatedAgentScript : MonoBehaviour{
 	NavMeshAgent agent;
 	private bool active;
 	private Animator anim;
+
+	private float epsilon = 3.0f; /* Agents will stop running if within this distance of the target.
+									 Should be set to the same value as the "Stopping Distance" variable in the AnimatedAgent prefab. */
 
 	void Start(){
 		anim = GetComponent<Animator>();
@@ -25,17 +28,19 @@ public class AnimatedAgentScript : MonoBehaviour{
 	}
 
 	void Update(){
-		if (targetChanged)
+		if (targetChanged){
+			transform.LookAt (target);
 			agent.SetDestination(target);
+		}
 
 		if (active){
-			if (transform.position == target)
+			if ( Math.Abs(transform.position.x - target.x) < epsilon &&
+				 Math.Abs(transform.position.y - target.y) < epsilon &&
+				 Math.Abs(transform.position.z - target.z) < epsilon)
 				anim.SetFloat("MoveSpeed", 0);
 			
-			else{
-				transform.LookAt (target);
+			else
 				anim.SetFloat ("MoveSpeed", 0.5f);
-			}
 		}
 	}
 	
