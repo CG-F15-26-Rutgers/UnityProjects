@@ -2,33 +2,32 @@ using UnityEngine;
 using System.Collections;
  
 public class moveOnMouseClick : MonoBehaviour {
-	private Transform myTransform;				// this transform
-	private Vector3 destinationPosition;		// The destination Point
-	private float destinationDistance;			// The distance between myTransform and destinationPosition
+	private Transform myTransform;				
+	private Vector3 destinationPosition;		
+	private float destinationDistance;			
  
-	public float moveSpeed;						// The Speed the character will move
+	public float moveSpeed;						
  
  
  
 	void Start () {
-		myTransform = transform;							// sets myTransform to this GameObject.transform
-		destinationPosition = myTransform.position;			// prevents myTransform reset
+		myTransform = transform;							
+		destinationPosition = myTransform.position;			
 	}
  
 	void Update () {
  
-		// keep track of the distance between this gameObject and destinationPosition
 		destinationDistance = Vector3.Distance(destinationPosition, myTransform.position);
  
-		if(destinationDistance < .5f){		// To prevent shakin behavior when near destination
+		if(destinationDistance < .5f){		
 			moveSpeed = 0;
 		}
-		else if(destinationDistance > .5f){			// To Reset Speed to default
+		else if(destinationDistance > .5f){			
 			moveSpeed = 3;
 		}
  
  
-		// Moves the Player if the Left Mouse Button was clicked
+		
 		if (Input.GetMouseButtonDown(0)&& GUIUtility.hotControl ==0) {
  
 			Plane playerPlane = new Plane(Vector3.up, myTransform.position);
